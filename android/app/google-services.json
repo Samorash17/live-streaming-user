@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "184117250689",
+    "project_id": "alertstream-u1",
+    "storage_bucket": "alertstream-u1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184117250689:android:f1917b12653bbe442b5b80",
+        "android_client_info": {
+          "package_name": "com.example.alert_stream_u"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPpz01u9s9Y514x2gPMd3q8hT8q3-G_Eo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

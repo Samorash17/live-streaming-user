@@ -1,0 +1,50 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class StreamService {
+  final String baseUrl;
+
+  StreamService({this.baseUrl = 'http://192.168.209.22:3000'});
+
+  Future<Map<String, dynamic>> createStream() async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/api/streams'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'title': 'Emergency Stream',
+        'description': 'Live emergency broadcast',
+        'status': 'idle'
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = json.decode(response.body);
+      return data;
+    } else {
+      throw Exception('Failed to create stream');
+    }
+  }
+
+  Future<void> updateStreamStatus(String streamId, String status) async {
+    final response = await http.patch(
+      Uri.parse('$baseUrl/api/streams/$streamId'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({'status': status}),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update stream status');
+    }
+  }
+
+  Future<void> deleteStream(String streamId) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl/api/streams/$streamId'),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to delete stream');
+    }
+  }
+}
