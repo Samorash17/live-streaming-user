@@ -166,7 +166,7 @@ class _BroadcastScreenState extends State<BroadcastScreen> {
 class StreamService {
   final String baseUrl;
 
-  StreamService({this.baseUrl = 'http://192.168.209.22:3000'});
+  StreamService({this.baseUrl = 'http://192.168.0.9:3000'});
 
   Future<Map<String, dynamic>> createStream() async {
     final response = await http.post(

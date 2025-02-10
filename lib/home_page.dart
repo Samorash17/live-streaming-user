@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'screens/broadcast_screen.dart';
+import '../zego/constants.dart';
+import '../zego/live_page.dart';
+import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -80,15 +83,19 @@ class HomePage extends StatelessWidget {
       },
       child: ElevatedButton.icon(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const BroadcastScreen(
-                streamKey: 'your-stream-key',
-                streamProfile: '720p',
-              ),
-            ),
-          );
+          if (ZegoUIKitPrebuiltLiveStreamingController()
+                    .minimize
+                    .isMinimizing) {
+                  /// when the application is minimized (in a minimized state),
+                  /// disable button clicks to prevent multiple PrebuiltLiveStreaming components from being created.
+                  return;
+                }
+
+                jumpToLivePage(
+                  context,
+                  liveID: '1234',
+                  isHost: true,
+                );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red,
@@ -113,3 +120,12 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+void jumpToLivePage(BuildContext context,
+      {required String liveID, required bool isHost}) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LivePage(liveID: '1234', isHost: isHost),
+      ),
+    );
+  }
